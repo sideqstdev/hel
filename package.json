@@ -1,0 +1,33 @@
+{
+  "name": "sideqst-api",
+  "version": "1.0.0",
+  "description": "GraphQL API for SideQst",
+  "main": "server.ts",
+  "scripts": {
+    "start": "node dist/server.js",
+    "build": "tsc --project tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon src/server.ts"
+  },
+  "author": "Milo Rue",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.19.2",
+    "bcryptjs": "^2.4.3",
+    "class-validator": "^0.13.1",
+    "dotenv": "^8.2.0",
+    "module-alias": "^2.2.2",
+    "nodemailer": "^6.4.17",
+    "pg": "^8.5.1",
+    "type-graphql": "^1.1.1",
+    "typeorm": "^0.2.30",
+    "winston": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/node": "^14.14.22",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3"
+  }
+}

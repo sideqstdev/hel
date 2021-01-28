@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "skipLibCheck": true,
+        "target": "ES6",
+        "sourceMap": true,
+        "outDir": "dist/",
+        "baseUrl": "./src",
+        "paths": {
+            "@sideqst-logger/*": ["./util/logging/*"]
+        },
+        "inlineSources": true,
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+
+        // TypeORM Specific Configuration:
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": [
+            "ES2016", "ES2019"
+        ]
+    },
+    "exclude": ["node_modules", "dist"]
+}
