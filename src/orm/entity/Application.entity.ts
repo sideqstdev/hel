@@ -1,7 +1,8 @@
 import { ObjectType, Field } from "type-graphql";
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, OneToOne } from "typeorm";
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, OneToOne, JoinColumn } from "typeorm";
 import { UserEntity } from "./User.entity";
 import { JobEntity } from "./Job.entity";
+import { FileEntity } from "./File.entity";
 
 @ObjectType("Application")
 @Entity({name: "application"})
@@ -34,4 +35,9 @@ export class ApplicationEntity extends BaseEntity {
     @Field()
     @Column({default: false})
     applied: boolean;
+
+    @Field({nullable: true})
+    @OneToOne(() => FileEntity, {eager: true})
+    @JoinColumn()
+    resume: FileEntity;
 }

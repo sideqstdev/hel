@@ -3,6 +3,24 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+enum AccountResponseCode {
+  DUPLICATE
+  ERROR
+  INVALID
+  SUCCESS
+}
+
+type Application {
+  applied: Boolean!
+  coverLetter: String!
+  dateApplied: DateTime
+  dateStarted: DateTime
+  id: String!
+  job: Job!
+  resume: File
+  user: User!
+}
+
 type Company {
   companySize: CompanySize
   employeeCount: Float!
@@ -41,6 +59,13 @@ enum Experience {
   SENIOR
 }
 
+type File {
+  created: DateTime!
+
+  """The uri at which this file exists on the internet."""
+  uri: String!
+}
+
 type Image {
   """The date at which image was created."""
   created: DateTime!
@@ -57,6 +82,7 @@ type Image {
 
 type Job {
   applicants: Float
+  applications: [Application!]!
   company: Company
   currency: String
   description: String!
@@ -66,6 +92,7 @@ type Job {
   offSiteApp: Boolean!
   offSiteLink: String!
   posted: DateTime
+  promoted: Boolean!
   salaryCeiling: Float
   salaryFloor: Float
   title: String!
@@ -103,6 +130,20 @@ enum JobType {
   WRITING
 }
 
+type MailingList {
+  created: DateTime!
+
+  """Email address for hearing more about sideqst"""
+  email: String!
+}
+
+type Mutation {
+  confirmAccount(input: confirmAccountInput!): confirmAccountResponse!
+  createAccount(input: createAccountInput!): createAccountResponse!
+  loginAccount(input: loginAccountInput!): loginAccountResponse!
+  mailingList(input: mailingListInput!): mailingListResponse!
+}
+
 type Post {
   content: String!
   created: DateTime!
@@ -120,25 +161,80 @@ type Query {
 
 type User {
   activated: Boolean
+  applications: [Application!]
   avatar: Image
-  bio: String!
-  companies: [Company!]!
-  created: DateTime!
-  dob: DateTime!
+  bio: String
+  companies: [Company!]
+  created: DateTime
+  dob: DateTime
   email: String!
-  firstName: String!
+  emailCode: String
+  firstName: String
   id: String!
-  jobs: [Job!]!
-  lastLogin: DateTime!
-  lastName: String!
+  industry: String
+  jobs: [Job!]
+  lastLogin: DateTime
+  lastName: String
   linkedin: String
   links: [String!]
-  post: [Post!]!
-  saved: [Job!]!
+  posts: [Post!]
+  saved: [Job!]
   twitter: String
-  updated: DateTime!
+  updated: DateTime
   username: String!
   verified: Boolean
-  version: Float!
+  version: Float
   website: String
+}
+
+input confirmAccountInput {
+  code: String!
+  userId: String
+}
+
+type confirmAccountResponse {
+  """Redirect url to users account"""
+  redirect: String
+
+  """
+  Whether or not the code was successful in confirming the account creation
+  """
+  success: Boolean
+}
+
+input createAccountInput {
+  email: String!
+  industry: [JobType!]
+  password: String!
+  username: String!
+}
+
+type createAccountResponse {
+  created: Boolean!
+  details: String!
+  responseCode: AccountResponseCode!
+  user: User
+}
+
+input loginAccountInput {
+  email: String!
+  password: String!
+}
+
+type loginAccountResponse {
+  details: String!
+
+  """Notices for the account in question"""
+  notices: String
+  success: Boolean!
+  user: User
+}
+
+input mailingListInput {
+  """Email address for signing up for the mailing list for sideqst"""
+  email: String!
+}
+
+type mailingListResponse {
+  submitted: Boolean!
 }

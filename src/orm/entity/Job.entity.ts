@@ -82,4 +82,8 @@ export class JobEntity extends BaseEntity {
     @OneToMany(() => ApplicationEntity, application => application.job)
     applications: ApplicationEntity[];
 
+    @Field()
+    @Column({default: false})
+    promoted: boolean;
+
 }

@@ -1,6 +1,6 @@
 import { join } from "path";
 import { buildSchema } from "type-graphql";
-import LoggingService from "../logging/logging.service";
+import LoggingService from "../logging/Logging.service";
 
 const resolvers = join(__dirname + "../../../gql/resolvers/") + "**/*.resolver"
 LoggingService.info(`Resolvers are located @${resolvers}`)

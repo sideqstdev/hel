@@ -1,7 +1,7 @@
 require('dotenv').config()
 import 'module-alias';
 import {createConnection} from 'typeorm';
-import LoggingService from "./util/logging/logging.service";
+import LoggingService from "./util/logging/Logging.service";
 import { connectDatabase } from './util/database/ConnectDatabase';
 import { createSchema } from './util/schema/CreateSchema';
 import {ApolloServer} from 'apollo-server'
