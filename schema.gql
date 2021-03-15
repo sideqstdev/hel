@@ -21,6 +21,15 @@ type Application {
   user: User!
 }
 
+type Community {
+  created: DateTime
+  description: String!
+  id: String!
+  jobs: [Job!]
+  name: String!
+  posts: [Post!]
+}
+
 type Company {
   companySize: CompanySize
   employeeCount: Float!
@@ -83,11 +92,15 @@ type Image {
 type Job {
   applicants: Float
   applications: [Application!]!
+
+  """Each job can have one primary community"""
+  community: Community!
   company: Company
   currency: String
   description: String!
   experience: Experience!
   id: String!
+  impressions: Int
   location: String!
   offSiteApp: Boolean!
   offSiteLink: String!
@@ -145,6 +158,7 @@ type Mutation {
 }
 
 type Post {
+  community: Community
   content: String!
   created: DateTime!
   id: String!

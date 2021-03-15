@@ -8,7 +8,7 @@ export enum CompanySize {
     LARGE_LOW = "251-500 Employees",
     LARGE_HIGH = "501-1000 Employees",
     ENTERPRISE = "1000+ Employees",
-    NONE = "Num of Employees not Provided"
+    NONE = "Num of Employees not provided"
 }
 
 registerEnumType(CompanySize, {

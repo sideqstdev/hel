@@ -1,10 +1,11 @@
-import { ObjectType, Field } from "type-graphql";
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Index, ManyToOne, Column, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
+import { ObjectType, Field, Int } from "type-graphql";
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Index, ManyToOne, Column, CreateDateColumn, UpdateDateColumn, OneToMany, OneToOne } from "typeorm";
 import { CompanyEntity } from "./Company.entity";
 import { JobType } from "../../types/enums/JobType.enum";
 import { Experience } from "../../types/enums/ExperienceEnum.enum";
 import { UserEntity } from "./User.entity";
 import { ApplicationEntity } from "./Application.entity";
+import { CommunityEntity } from "./Community.entity";
 
 @ObjectType("Job")
 @Entity({name: "job"})
@@ -85,5 +86,14 @@ export class JobEntity extends BaseEntity {
     @Field()
     @Column({default: false})
     promoted: boolean;
+
+    @Field(() => Int, {defaultValue: 0})
+    @Column({default: 0})
+    impressions: number;
+
+    @Field({description: "Each job can have one primary community"})
+    @OneToOne(() => CommunityEntity, community => community.jobs)
+    community: CommunityEntity;
+
 
 }

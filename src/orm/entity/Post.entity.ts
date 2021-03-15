@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from "type-graphql";
 import { Entity, BaseEntity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, Column } from "typeorm";
 import { UserEntity } from "./User.entity";
+import { CommunityEntity } from "./Community.entity";
 
 @ObjectType("Post")
 @Entity({name: "post"})
@@ -36,4 +37,8 @@ export class PostEntity extends BaseEntity {
     @Field(() => Int, {defaultValue: 0})
     @Column({default: 0})
     impressions: number;
+
+    @Field(() => CommunityEntity, {nullable: true})
+    @ManyToOne(() => CommunityEntity, community => community.posts)
+    community: CommunityEntity;
 }

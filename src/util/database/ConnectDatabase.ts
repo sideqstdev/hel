@@ -7,6 +7,7 @@ import { PostEntity } from "../../orm/entity/Post.entity";
 import { ApplicationEntity } from "../../orm/entity/Application.entity";
 import { FileEntity } from "../../orm/entity/File.entity";
 import { MailingListEntity } from "../../orm/entity/MailingList.entity";
+import { CommunityEntity } from "../../orm/entity/Community.entity";
 
 const dev: boolean = process.env.DEV_MODE === "true";
 
@@ -19,9 +20,10 @@ export const connectDatabase = async(): Promise<Connection> => {
             username: process.env.DB_USER,
             password: process.env.DB_PASS,
             database: process.env.DB_DATABASE,
-            entities: [UserEntity, JobEntity, CompanyEntity, ImageEntity, PostEntity, ApplicationEntity, FileEntity, MailingListEntity],
+            entities: [UserEntity, JobEntity, CompanyEntity, ImageEntity, PostEntity, ApplicationEntity, FileEntity, MailingListEntity, CommunityEntity],
             uuidExtension: "pgcrypto",
             synchronize: dev ? true : false,
+            
         }
     )
 }
